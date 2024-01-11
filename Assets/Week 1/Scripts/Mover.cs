@@ -21,7 +21,7 @@ public class Mover : MonoBehaviour
         transform.Translate(keyboardInput * speed * Time.deltaTime, 0, 0);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(prefab, transform.position, transform.rotation);
+            Instantiate(prefab, barrel.position, barrel.rotation);
         }
     }
 }
