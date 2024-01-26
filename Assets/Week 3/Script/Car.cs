@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +10,9 @@ public class Car : MonoBehaviour
     public float steeringSpeed = 200;
     Rigidbody2D rigidbody;
     public float maxSpeed = 200;
+    public float pushForce = 5f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,4 +35,24 @@ public class Car : MonoBehaviour
         }
        
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("MapBoundary"))
+        {
+        
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("tire"))
+        {
+            Vector2 collisionDirection = (collision.transform.position - transform.position).normalized;
+
+            Vector2 pushDirection = -collisionDirection;
+
+            rigidbody.AddForce(pushDirection * pushForce, ForceMode2D.Impulse);
+        }
+    }
+
 }
